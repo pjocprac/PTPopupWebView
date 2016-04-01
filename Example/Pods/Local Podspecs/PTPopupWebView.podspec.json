@@ -1,0 +1,25 @@
+{
+  "name": "PTPopupWebView",
+  "version": "0.1.0",
+  "summary": "A short description of PTPopupWebView.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/PTPopupWebView",
+  "license": "MIT",
+  "authors": {
+    "Takeshi Watanabe": "watanabe@tritrue.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/PTPopupWebView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "PTPopupWebView": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}

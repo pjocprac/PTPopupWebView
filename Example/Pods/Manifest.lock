@@ -1,0 +1,14 @@
+PODS:
+  - PTPopupWebView (0.1.0)
+
+DEPENDENCIES:
+  - PTPopupWebView (from `../`)
+
+EXTERNAL SOURCES:
+  PTPopupWebView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  PTPopupWebView: 5b9eb7d9ff020f984f7e357ed967d041804d35fe
+
+COCOAPODS: 0.39.0

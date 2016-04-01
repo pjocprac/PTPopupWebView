@@ -1,0 +1,6 @@
+framework module Pods_PTPopupWebView_Tests {
+  umbrella header "Pods-PTPopupWebView_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'PTPopupWebView_Example', :exclusive => true do
+  pod 'PTPopupWebView', :path => '../'
+end
+
+target 'PTPopupWebView_Tests', :exclusive => true do
+  pod 'PTPopupWebView', :path => '../'
+
+  
+end
