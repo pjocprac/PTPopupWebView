@@ -262,7 +262,7 @@ public class PTPopupWebView : UIView {
             
             button.adjustsImageWhenHighlighted = false
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.addTarget(self, action: "buttonTapped:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(PTPopupWebView.buttonTapped(_:)), forControlEvents: .TouchUpInside)
             buttonContainer.addSubview(button)
             buttons.append(button)
         }
@@ -330,7 +330,7 @@ public class PTPopupWebView : UIView {
             
             closeButton.setImage(image, forState: .Normal)
             closeButton.contentEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8)
-            closeButton.addTarget(self, action: "close", forControlEvents: .TouchUpInside)
+            closeButton.addTarget(self, action: #selector(PTPopupWebView.close), forControlEvents: .TouchUpInside)
         }
 
         // Web view
@@ -495,8 +495,7 @@ public class PTPopupWebView : UIView {
                     }
                 case .LinkClose(let url):
                     if let url = url {
-                        let request = NSURLRequest(URL: url)
-                        webView.loadRequest(request)
+                        UIApplication.sharedApplication().openURL(url)
                     }
                     close()
                 case .Back:
