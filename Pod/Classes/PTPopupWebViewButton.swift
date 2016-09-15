@@ -12,70 +12,70 @@ import WebKit
 
 public enum PTPopupWebViewButtonType {
     /// Button with action of close popup
-    case Close
+    case close
     /// Button with action of open link
-    case Link (NSURL?)
+    case link (URL?)
     /// Button with action of open link and close popup
-    case LinkClose (NSURL?)
+    case linkClose (URL?)
     /// Button with action of web navigation of "back"
-    case Back
+    case back
     /// Button with action of web navigation of "forward"
-    case Forward
+    case forward
     /// Button with action of web navigation of "reload"
-    case Reload
+    case reload
     /// Button with custom action
-    case Custom
+    case custom
 }
 
-public class PTPopupWebViewButton {
+open class PTPopupWebViewButton {
     /* Property */
-    public private(set) var type : PTPopupWebViewButtonType = .Close
-    public private(set) var title : String = ""
-    public private(set) var backgroundColor : UIColor?
-    public private(set) var foregroundColor : UIColor?
-    public private(set) var disabledColor : UIColor?
-    public private(set) var font : UIFont?
-    public private(set) var image : UIImage?
-    public private(set) var handler : (() -> ())?
+    open fileprivate(set) var type : PTPopupWebViewButtonType = .close
+    open fileprivate(set) var title : String = ""
+    open fileprivate(set) var backgroundColor : UIColor?
+    open fileprivate(set) var foregroundColor : UIColor?
+    open fileprivate(set) var disabledColor : UIColor?
+    open fileprivate(set) var font : UIFont?
+    open fileprivate(set) var image : UIImage?
+    open fileprivate(set) var handler : (() -> ())?
 
     /// Button's title
-    public func title (title:String) -> Self {
+    open func title (_ title:String) -> Self {
         self.title = title
         return self
     }
 
     /// Button's background color
-    public func backgroundColor (color:UIColor?) -> Self {
+    open func backgroundColor (_ color:UIColor?) -> Self {
         self.backgroundColor = color
         return self
     }
     
     /// Button's foreground color
-    public func foregroundColor (color:UIColor?) -> Self {
+    open func foregroundColor (_ color:UIColor?) -> Self {
         self.foregroundColor = color
         return self
     }
 
     /// Button's foreground color when button is disabled
-    public func disabledColor (color:UIColor?) -> Self {
+    open func disabledColor (_ color:UIColor?) -> Self {
         self.disabledColor = color
         return self
     }
 
     /// Button's font
-    public func font (font:UIFont?) -> Self {
+    open func font (_ font:UIFont?) -> Self {
         self.font = font
         return self
     }
 
     /// Button's image
-    public func image (image:UIImage?) -> Self {
+    open func image (_ image:UIImage?) -> Self {
         self.image = image
         return self
     }
 
     /// Button's custom action
-    public func handler (handler:(() -> ())?) -> Self {
+    open func handler (_ handler:(() -> ())?) -> Self {
         self.handler = handler
         return self
     }
@@ -91,21 +91,21 @@ public class PTPopupWebViewButton {
     }
     
     /// Set the default image to image property.
-    public func useDefaultImage() -> Self {
+    open func useDefaultImage() -> Self {
         var imageName : String? = nil
         switch type {
-        case .Close     : imageName = "close"
-        case .LinkClose : imageName = "close"
-        case .Back      : imageName = "back"
-        case .Forward   : imageName = "forward"
-        case .Reload    : imageName = "reload"
+        case .close     : imageName = "close"
+        case .linkClose : imageName = "close"
+        case .back      : imageName = "back"
+        case .forward   : imageName = "forward"
+        case .reload    : imageName = "reload"
         default         : break
         }
         
         if let imageName = imageName {
-            let bundle = NSBundle(forClass: PTPopupWebViewButton.self)
-            let image = UIImage(named: imageName, inBundle: bundle, compatibleWithTraitCollection: nil)
-            self.image = image?.imageWithRenderingMode(.AlwaysTemplate)
+            let bundle = Bundle(for: PTPopupWebViewButton.self)
+            let image = UIImage(named: imageName, in: bundle, compatibleWith: nil)
+            self.image = image?.withRenderingMode(.alwaysTemplate)
         }
         
         return self
