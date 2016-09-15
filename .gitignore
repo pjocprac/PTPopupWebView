@@ -31,4 +31,5 @@ DerivedData
 #
 # Pods/
 
+Carthage/Build
 *.bcsymbolmap
