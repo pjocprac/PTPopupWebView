@@ -10,39 +10,39 @@ import Foundation
 
 public enum PTPopupWebViewButtonDistribution {
     /// All buttons have equal width
-    case Equal
+    case equal
     /// Adjust the width the contents of the button
-    case Proportional
+    case proportional
 }
 
-public class PTPopupWebViewStyle {
+open class PTPopupWebViewStyle {
     // MARK: Content view's property
-    public private(set) var outerMargin : UIEdgeInsets = UIEdgeInsetsZero
-    public private(set) var innerMargin : UIEdgeInsets = UIEdgeInsetsZero
-    public private(set) var backgroundColor : UIColor = .whiteColor()
-    public private(set) var cornerRadius : CGFloat = 8.0
+    open fileprivate(set) var outerMargin : UIEdgeInsets = UIEdgeInsets.zero
+    open fileprivate(set) var innerMargin : UIEdgeInsets = UIEdgeInsets.zero
+    open fileprivate(set) var backgroundColor : UIColor = .white
+    open fileprivate(set) var cornerRadius : CGFloat = 8.0
 
     // MARK: Content view's property setter
     /// Content view's corner radius (Default: 8.0)
-    public func cornerRadius(value: CGFloat) -> Self {
+    open func cornerRadius(_ value: CGFloat) -> Self {
         self.cornerRadius = value
         return self
     }
 
     /// Spacing between frame and content view (Default: UIEdgeInsetsZero)
-    public func outerMargin(value: UIEdgeInsets) -> Self {
+    open func outerMargin(_ value: UIEdgeInsets) -> Self {
         self.outerMargin = value
         return self
     }
 
     /// Spacing between content view and web view (Default: UIEdgeInsetsZero)
-    public func innerMargin(value: UIEdgeInsets) -> Self {
+    open func innerMargin(_ value: UIEdgeInsets) -> Self {
         self.innerMargin = value
         return self
     }
 
     /// Content view's background color (Default: white color)
-    public func backgroundColor(value: UIColor) -> Self {
+    open func backgroundColor(_ value: UIColor) -> Self {
         self.backgroundColor = value
         return self
     }
@@ -50,39 +50,39 @@ public class PTPopupWebViewStyle {
 
 
     // MARK: Title area's property
-    public private(set) var titleHeight : CGFloat = 40.0
-    public private(set) var titleHidden = false
-    public private(set) var titleBackgroundColor : UIColor = .clearColor()
-    public private(set) var titleForegroundColor : UIColor = .darkGrayColor()
-    public private(set) var titleFont : UIFont = .systemFontOfSize(16)
+    open fileprivate(set) var titleHeight : CGFloat = 40.0
+    open fileprivate(set) var titleHidden = false
+    open fileprivate(set) var titleBackgroundColor : UIColor = .clear
+    open fileprivate(set) var titleForegroundColor : UIColor = .darkGray
+    open fileprivate(set) var titleFont : UIFont = .systemFont(ofSize: 16)
 
     // MARK: Title area's property setter
     /// Title area's height (Default: 40.0)
-    public func titleHeight(value: CGFloat) -> Self {
+    open func titleHeight(_ value: CGFloat) -> Self {
         self.titleHeight = value;
         return self
     }
 
     /// Title area's invisibility (Default: false (visible))
-    public func titleHidden(value: Bool) -> Self {
+    open func titleHidden(_ value: Bool) -> Self {
         self.titleHidden = value
         return self
     }
 
     /// Title area's background color (Default: clear color)
-    public func titleBackgroundColor(value: UIColor) -> Self {
+    open func titleBackgroundColor(_ value: UIColor) -> Self {
         self.titleBackgroundColor = value
         return self
     }
 
     /// Title area's foreground color (Default: dark gray color)
-    public func titleForegroundColor(value: UIColor) -> Self {
+    open func titleForegroundColor(_ value: UIColor) -> Self {
         self.titleForegroundColor = value
         return self
     }
 
     /// Title's font (Default: .systemFontOfSize(16))
-    public func titleFont(value: UIFont) -> Self {
+    open func titleFont(_ value: UIFont) -> Self {
         self.titleFont = value
         return self
     }
@@ -90,57 +90,57 @@ public class PTPopupWebViewStyle {
 
 
     // MARK: Button area's property
-    public private(set) var buttonHeight : CGFloat = 40
-    public private(set) var buttonHidden = false
-    public private(set) var buttonBackgroundColor : UIColor = .clearColor()
-    public private(set) var buttonForegroundColor : UIColor = UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1)
-    public private(set) var buttonDisabledColor : UIColor = .lightGrayColor()
-    public private(set) var buttonFont : UIFont = .systemFontOfSize(16)
-    public private(set) var buttonDistribution : PTPopupWebViewButtonDistribution = .Equal
+    open fileprivate(set) var buttonHeight : CGFloat = 40
+    open fileprivate(set) var buttonHidden = false
+    open fileprivate(set) var buttonBackgroundColor : UIColor = .clear
+    open fileprivate(set) var buttonForegroundColor : UIColor = UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1)
+    open fileprivate(set) var buttonDisabledColor : UIColor = .lightGray
+    open fileprivate(set) var buttonFont : UIFont = .systemFont(ofSize: 16)
+    open fileprivate(set) var buttonDistribution : PTPopupWebViewButtonDistribution = .equal
 
     // MARK: Button's property setter
     /// Button area's height (Default: 40.0)
-    public func buttonHeight(value: CGFloat) -> Self {
+    open func buttonHeight(_ value: CGFloat) -> Self {
         self.buttonHeight = value
         return self
     }
 
     /// Button area's invisibility (Default: false (visible))
-    public func buttonHidden(value: Bool) -> Self {
+    open func buttonHidden(_ value: Bool) -> Self {
         self.buttonHidden = value
         return self
     }
 
     /// Button's default background color (Default: clear color)
     /// This setting can be overridden by the button indivisual setting.
-    public func buttonBackgroundColor(value: UIColor) -> Self {
+    open func buttonBackgroundColor(_ value: UIColor) -> Self {
         self.buttonBackgroundColor = value
         return self
     }
 
     /// Button's default foreground color (Default: green color, rgb(76,175,80))
     /// This setting can be overridden by the button indivisual setting.
-    public func buttonForegroundColor(value: UIColor) -> Self {
+    open func buttonForegroundColor(_ value: UIColor) -> Self {
         self.buttonForegroundColor = value
         return self
     }
 
     /// Button's default foreground color when button is disabled (Default: light gray color)
     /// This setting can be overridden by the button indivisual setting.
-    public func buttonDisabledColor(value: UIColor) -> Self {
+    open func buttonDisabledColor(_ value: UIColor) -> Self {
         self.buttonDisabledColor = value
         return self
     }
 
     /// Button's font (Default: .systemFontOfSize(16))
     /// This setting can be overridden by the button indivisual setting.
-    public func buttonFont(value: UIFont) -> Self {
+    open func buttonFont(_ value: UIFont) -> Self {
         self.buttonFont = value
         return self
     }
 
     /// Button's distribution (Default: .Equal, all buttons have equal width)
-    public func buttonDistribution(value: PTPopupWebViewButtonDistribution) -> Self {
+    open func buttonDistribution(_ value: PTPopupWebViewButtonDistribution) -> Self {
         self.buttonDistribution = value
         return self
     }
@@ -148,11 +148,11 @@ public class PTPopupWebViewStyle {
 
 
     // MARK: Other properties
-    public private(set) var closeButtonHidden = true
+    open fileprivate(set) var closeButtonHidden = true
 
     // MARK: Other properties setter
     /// Close button's invisibility (positioned at right top of view) (Default: true (invisible))
-    public func closeButtonHidden(value: Bool) -> Self {
+    open func closeButtonHidden(_ value: Bool) -> Self {
         self.closeButtonHidden = value
         return self
     }
@@ -163,11 +163,11 @@ public class PTPopupWebViewStyle {
     }
 }
 
-public class PTPopupWebViewControllerStyle : PTPopupWebViewStyle {
+open class PTPopupWebViewControllerStyle : PTPopupWebViewStyle {
     override public init(){
         super.init()
         
-        let screenBounds = UIScreen.mainScreen().bounds
+        let screenBounds = UIScreen.main.bounds
         let vMargin = screenBounds.height * 0.1
         let hMargin = screenBounds.width  * 0.05
         outerMargin = UIEdgeInsetsMake(vMargin, hMargin, vMargin, hMargin)
