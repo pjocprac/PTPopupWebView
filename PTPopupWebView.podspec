@@ -8,12 +8,12 @@
 
 Pod::Spec.new do |s|
   s.name             = "PTPopupWebView"
-  s.version          = "0.3.0"
+  s.version          = "0.4.0"
   s.summary          = "Swift subclass of the UIView which provide Popup web view."
-  s.homepage         = "https://github.com/pjocprac/PTPopupWebView"
+  s.homepage         = "https://github.com/tumiki0ituki/PTPopupWebView.git"
   s.license          = 'MIT'
   s.author           = { "Takeshi Watanabe" => "watanabe@tritrue.com" }
-  s.source           = { :git => "https://github.com/pjocprac/PTPopupWebView.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/tumiki0ituki/PTPopupWebView.git", :branch => 'swift3', :tag => s.version.to_s }
   s.platform     = :ios, '8.0'
   s.requires_arc = true
   s.source_files = 'Pod/Classes/**/*'

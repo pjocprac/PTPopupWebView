@@ -27,6 +27,7 @@ public enum PTPopupWebViewButtonType {
     case custom
 }
 
+
 open class PTPopupWebViewButton {
     /* Property */
     open fileprivate(set) var type : PTPopupWebViewButtonType = .close

@@ -386,6 +386,9 @@
 					4206207BDA3390B2B89B7ABDA1E0A5AF = {
 						LastSwiftMigration = 0800;
 					};
+					7766998E21D05CCEF43F19A5A9F9A087 = {
+						LastSwiftMigration = 0800;
+					};
 				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -645,6 +648,7 @@
 				PRODUCT_NAME = PTPopupWebView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -751,6 +755,7 @@
 				PRODUCT_NAME = PTPopupWebView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
