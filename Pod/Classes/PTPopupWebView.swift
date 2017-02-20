@@ -110,7 +110,7 @@ open class PTPopupWebView : UIView {
         - string: URL string
      */
     open func URL(string urlString: String) -> Self {
-        URL(Foundation.URL(string: urlString))
+        self.URL = Foundation.URL(string: urlString)
         return self
     }
 

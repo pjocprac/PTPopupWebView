@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PTPopupWebView"
-  s.version          = "0.4.0"
+  s.version          = "0.5.0"
   s.summary          = "Swift subclass of the UIView which provide Popup web view."
   s.homepage         = "https://github.com/pjocprac/PTPopupWebView.git"
   s.license          = 'MIT'
