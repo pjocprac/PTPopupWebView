@@ -359,7 +359,27 @@ open class PTPopupWebView : UIView {
             button.removeObserver(self, forKeyPath: "enabled")
         }
     }
-    
+
+    fileprivate func updateButtonState() {
+        for i in 0 ..< buttonSettings.count {
+            let buttonSetting = buttonSettings[i]
+            switch buttonSetting.type {
+            case .back    :
+                // To enable the Back button, when there is history.
+                buttons[i].isEnabled = webView.canGoBack
+            case .forward :
+                // To enable the Forward button, when there is advance history.
+                buttons[i].isEnabled = webView.canGoForward
+            case .reload  :
+                // To enable the update button, after completion of reading.
+                buttons[i].isEnabled = webView.estimatedProgress == 1.0
+            default:
+                break
+            }
+        }
+    }
+
+
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object is WKWebView {
             if let keyPath = keyPath {
@@ -374,27 +394,13 @@ open class PTPopupWebView : UIView {
                     }
                     break;
                 case "URL":
+                    updateButtonState()
                     break;
                 case "load":
+                    updateButtonState()
                     break;
                 case "estimatedProgress":
-                    for i in 0 ..< buttonSettings.count {
-                        let buttonSetting = buttonSettings[i]
-                        switch buttonSetting.type {
-                        case .back    :
-                            // To enable the Back button, when there is history.
-                            buttons[i].isEnabled = webView.canGoBack
-                        case .forward :
-                            // To enable the Forward button, when there is advance history.
-                            buttons[i].isEnabled = webView.canGoForward
-                        case .reload  :
-                            // To enable the update button, after completion of reading.
-                            if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? Double {
-                                buttons[i].isEnabled = progress == 1.0
-                            }
-                        default       : break
-                        }
-                    }
+                    updateButtonState()
                     break;
                 default:
                     break
