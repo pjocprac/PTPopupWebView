@@ -475,7 +475,7 @@ open class PTPopupWebView : UIView {
     }
     
     /// Close popup view
-    open func close() {
+    @objc open func close() {
         if let delegate = delegate {
             // if delegate != nil (ex. when use PTPopupWebViewContoller)
             delegate.close()
@@ -487,6 +487,7 @@ open class PTPopupWebView : UIView {
     }
     
     
+    @objc
     internal func buttonTapped (_ sender: AnyObject) {
         if let button = sender as? UIButton, let index = buttons.index(of: button) {
             if index < buttonSettings.count {
