@@ -95,9 +95,13 @@ open class PTPopupWebViewController : UIViewController {
         self.contentView.addSubview(popupView)
         
         popupView.translatesAutoresizingMaskIntoConstraints = false
+        var borderItem :Any = contentView
+        if #available(iOS 11, *) {
+            borderItem = contentView.safeAreaLayoutGuide
+        }
         for attribute in attributes {
             let constraint = NSLayoutConstraint(
-                item  : contentView, attribute: attribute, relatedBy: NSLayoutRelation.equal,
+                item  : borderItem, attribute: attribute, relatedBy: NSLayoutRelation.equal,
                 toItem: popupView,   attribute: attribute, multiplier: 1.0, constant: 0.0)
             contentView.addConstraint(constraint)
             constraints[attribute] = constraint
