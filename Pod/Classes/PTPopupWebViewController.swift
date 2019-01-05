@@ -13,7 +13,7 @@ import WebKit
 open class PTPopupWebViewController : UIViewController {
     public enum PTPopupWebViewControllerBackgroundStyle {
         // blur effect background
-        case blurEffect (UIBlurEffectStyle)
+        case blurEffect (UIBlurEffect.Style)
         // opacity background
         case opacity (UIColor?)
         // transparent background
@@ -56,13 +56,13 @@ open class PTPopupWebViewController : UIViewController {
     open fileprivate(set) var popupDisappearStyle : PTPopupWebViewControllerTransitionStyle = .pop(0.3, true)
     
     fileprivate let attributes = [
-        NSLayoutAttribute.top,
-        NSLayoutAttribute.left,
-        NSLayoutAttribute.bottom,
-        NSLayoutAttribute.right
+        NSLayoutConstraint.Attribute.top,
+        NSLayoutConstraint.Attribute.left,
+        NSLayoutConstraint.Attribute.bottom,
+        NSLayoutConstraint.Attribute.right
     ]
 
-    fileprivate var constraints : [NSLayoutAttribute : NSLayoutConstraint] = [:]
+    fileprivate var constraints : [NSLayoutConstraint.Attribute : NSLayoutConstraint] = [:]
     
     override open func loadView() {
         let bundle = Bundle(for: type(of: self))
@@ -97,7 +97,7 @@ open class PTPopupWebViewController : UIViewController {
         popupView.translatesAutoresizingMaskIntoConstraints = false
         for attribute in attributes {
             let constraint = NSLayoutConstraint(
-                item  : contentView, attribute: attribute, relatedBy: NSLayoutRelation.equal,
+                item  : contentView, attribute: attribute, relatedBy: NSLayoutConstraint.Relation.equal,
                 toItem: popupView,   attribute: attribute, multiplier: 1.0, constant: 0.0)
             contentView.addConstraint(constraint)
             constraints[attribute] = constraint
@@ -121,7 +121,7 @@ open class PTPopupWebViewController : UIViewController {
             break
 
         case .fade (let duration):
-            UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: {self.popupView.alpha = 1}, completion: nil)
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: {self.popupView.alpha = 1}, completion: nil)
             
         case .slide(let direction, let duration, let damping):
             self.popupView.alpha = 1
@@ -135,10 +135,10 @@ open class PTPopupWebViewController : UIViewController {
                 self.popupView.transform = CGAffineTransform(translationX: 0, y: 0)
             }
             if damping {
-                UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: animations, completion: nil)
+                UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: animations, completion: nil)
             }
             else {
-                UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: animations, completion: nil)
+                UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: animations, completion: nil)
             }
             
         case .spread (let duration):
@@ -148,7 +148,7 @@ open class PTPopupWebViewController : UIViewController {
             CATransaction.setCompletionBlock({
                 self.popupView.layer.mask = nil
             })
-            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
 
             let maskLayer = CALayer()
             maskLayer.backgroundColor = UIColor.white.cgColor
@@ -176,10 +176,10 @@ open class PTPopupWebViewController : UIViewController {
             }
             
             if damping {
-                UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: animations, completion: nil)
+                UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0, options: UIView.AnimationOptions(), animations: animations, completion: nil)
             }
             else {
-                UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: animations, completion: nil)
+                UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: animations, completion: nil)
             }
         }
     }
@@ -273,7 +273,7 @@ extension PTPopupWebViewController : PTPopupWebViewDelegate {
             completion(true)
             
         case .fade (let duration):
-            UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: {self.popupView.alpha = 0}, completion: completion)
+            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: {self.popupView.alpha = 0}, completion: completion)
             
         case .slide(let direction, let duration, let damping):
             let animations = {
@@ -294,17 +294,17 @@ extension PTPopupWebViewController : PTPopupWebViewDelegate {
                     }
                 }
                 UIView.animate(
-                    withDuration: duration/3, delay: 0, options: UIViewAnimationOptions(),
+                    withDuration: duration/3, delay: 0, options: UIView.AnimationOptions(),
                     animations: springAnimations,
                     completion: { completed in
                         UIView.animate(
-                            withDuration: duration * 2/3, delay: 0, options: UIViewAnimationOptions(),
+                            withDuration: duration * 2/3, delay: 0, options: UIView.AnimationOptions(),
                             animations: animations,
                             completion: completion)
                     })
             }
             else {
-                UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: animations, completion: nil)
+                UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: animations, completion: nil)
             }
             
         case .spread (let duration):
@@ -312,7 +312,7 @@ extension PTPopupWebViewController : PTPopupWebViewDelegate {
             CATransaction.setCompletionBlock({
                 completion(true)
             })
-            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
 
             let maskLayer = CALayer()
             maskLayer.backgroundColor = UIColor.white.cgColor
@@ -336,13 +336,13 @@ extension PTPopupWebViewController : PTPopupWebViewDelegate {
         case .pop (let duration, let damping):
             if damping {
                 UIView.animate(
-                    withDuration: duration/3, delay: 0, options: UIViewAnimationOptions(),
+                    withDuration: duration/3, delay: 0, options: UIView.AnimationOptions(),
                     animations: {
                         self.popupView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
                     },
                     completion: { completed in
                         UIView.animate(
-                            withDuration: duration * 2/3, delay: 0, options: UIViewAnimationOptions(),
+                            withDuration: duration * 2/3, delay: 0, options: UIView.AnimationOptions(),
                             animations: {
                                 self.popupView.transform = CGAffineTransform(scaleX: 0.0000001, y: 0.0000001) // if 0, no animation
                             }, completion: completion)
@@ -350,7 +350,7 @@ extension PTPopupWebViewController : PTPopupWebViewDelegate {
             }
             else {
                 UIView.animate(
-                    withDuration: duration, delay: 0, options: UIViewAnimationOptions(),
+                    withDuration: duration, delay: 0, options: UIView.AnimationOptions(),
                     animations: {
                         self.popupView.transform = CGAffineTransform(scaleX: 0.0000001, y: 0.0000001)
                 }, completion: completion)

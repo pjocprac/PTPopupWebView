@@ -170,6 +170,6 @@ open class PTPopupWebViewControllerStyle : PTPopupWebViewStyle {
         let screenBounds = UIScreen.main.bounds
         let vMargin = screenBounds.height * 0.1
         let hMargin = screenBounds.width  * 0.05
-        outerMargin = UIEdgeInsetsMake(vMargin, hMargin, vMargin, hMargin)
+        outerMargin = UIEdgeInsets(top: vMargin, left: hMargin, bottom: vMargin, right: hMargin)
     }
 }

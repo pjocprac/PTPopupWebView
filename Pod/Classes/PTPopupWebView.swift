@@ -241,11 +241,11 @@ open class PTPopupWebView : UIView {
         for buttonSetting in buttonSettings {
             let button = UIButton()
             button.titleLabel?.font = buttonSetting.font ?? style.buttonFont
-            button.setTitle(buttonSetting.title, for: UIControlState())
-            button.setTitleColor(buttonSetting.foregroundColor ?? style.buttonForegroundColor, for: UIControlState())
+            button.setTitle(buttonSetting.title, for: UIControl.State())
+            button.setTitleColor(buttonSetting.foregroundColor ?? style.buttonForegroundColor, for: UIControl.State())
             button.setTitleColor(buttonSetting.disabledColor ?? style.buttonDisabledColor, for: .disabled)
             button.backgroundColor = buttonSetting.backgroundColor ?? style.buttonBackgroundColor
-            button.setImage(buttonSetting.image, for: UIControlState())
+            button.setImage(buttonSetting.image, for: UIControl.State())
             
             // Forward/Back/Reload's initial state is disabled
             switch buttonSetting.type {
@@ -271,29 +271,29 @@ open class PTPopupWebView : UIView {
         for i in 0 ..< buttons.count {
             let button = buttons[i]
             // Top/Bottom to container is 0
-            for attribute in [NSLayoutAttribute.top, NSLayoutAttribute.bottom] {
+            for attribute in [NSLayoutConstraint.Attribute.top, NSLayoutConstraint.Attribute.bottom] {
                 buttonContainer.addConstraint(
                     NSLayoutConstraint(
-                        item  : button,          attribute: attribute, relatedBy: NSLayoutRelation.equal,
+                        item  : button,          attribute: attribute, relatedBy: NSLayoutConstraint.Relation.equal,
                         toItem: buttonContainer, attribute: attribute, multiplier: 1.0, constant: 0.0)
                 )
             }
             
             // Leading constraint
             let leftItem      = i == 0 ? buttonContainer : buttons[i - 1]
-            let leftAttribute = i == 0 ? NSLayoutAttribute.leading : NSLayoutAttribute.trailing
+            let leftAttribute = i == 0 ? NSLayoutConstraint.Attribute.leading : NSLayoutConstraint.Attribute.trailing
             buttonContainer.addConstraint(
                 NSLayoutConstraint(
-                    item  : button,   attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal,
+                    item  : button,   attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal,
                     toItem: leftItem, attribute: leftAttribute, multiplier: 1.0, constant: 0.0)
             )
             
             // Trailing constraint
             let rightItem      = i == buttons.count - 1 ? buttonContainer : buttons[i + 1]
-            let rightAttribute = i == buttons.count - 1 ? NSLayoutAttribute.trailing : NSLayoutAttribute.leading
+            let rightAttribute = i == buttons.count - 1 ? NSLayoutConstraint.Attribute.trailing : NSLayoutConstraint.Attribute.leading
             buttonContainer.addConstraint(
                 NSLayoutConstraint(
-                    item  : button,    attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal,
+                    item  : button,    attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal,
                     toItem: rightItem, attribute: rightAttribute, multiplier: 1.0, constant: 0.0)
             )
         }
@@ -304,8 +304,8 @@ open class PTPopupWebView : UIView {
             for i in 1 ..< buttons.count {
                 buttonContainer.addConstraint(
                     NSLayoutConstraint(
-                        item  : buttons[0], attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal,
-                        toItem: buttons[i], attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0.0)
+                        item  : buttons[0], attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal,
+                        toItem: buttons[i], attribute: NSLayoutConstraint.Attribute.width, multiplier: 1.0, constant: 0.0)
                 )
             }
             
@@ -316,8 +316,8 @@ open class PTPopupWebView : UIView {
                 let diffWidth = baseWidth - calcContentWidth(buttons[i])
                 buttonContainer.addConstraint(
                     NSLayoutConstraint(
-                        item  : buttons[0], attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal,
-                        toItem: buttons[i], attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: diffWidth)
+                        item  : buttons[0], attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal,
+                        toItem: buttons[i], attribute: NSLayoutConstraint.Attribute.width, multiplier: 1.0, constant: diffWidth)
                 )
             }
         }
@@ -328,18 +328,18 @@ open class PTPopupWebView : UIView {
             let bundle = Bundle(for: PTPopupWebViewButton.self)
             let image = UIImage(named: "close", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             
-            closeButton.setImage(image, for: UIControlState())
-            closeButton.contentEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8)
+            closeButton.setImage(image, for: UIControl.State())
+            closeButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
             closeButton.addTarget(self, action: #selector(PTPopupWebView.close), for: .touchUpInside)
         }
 
         // Web view
         webView.translatesAutoresizingMaskIntoConstraints = false
         webViewContainer.addSubview(webView)
-        for attribute in [NSLayoutAttribute.top, NSLayoutAttribute.leading, NSLayoutAttribute.bottom, NSLayoutAttribute.trailing] {
+        for attribute in [NSLayoutConstraint.Attribute.top, NSLayoutConstraint.Attribute.leading, NSLayoutConstraint.Attribute.bottom, NSLayoutConstraint.Attribute.trailing] {
             webViewContainer.addConstraint(
                 NSLayoutConstraint(
-                    item  : webViewContainer, attribute: attribute, relatedBy: NSLayoutRelation.equal,
+                    item  : webViewContainer, attribute: attribute, relatedBy: NSLayoutConstraint.Relation.equal,
                     toItem: webView,          attribute: attribute, multiplier: 1.0, constant: 0.0)
             )
         }
@@ -469,7 +469,7 @@ open class PTPopupWebView : UIView {
     }
     
     /// Close popup view
-    open func close() {
+    @objc open func close() {
         if let delegate = delegate {
             // if delegate != nil (ex. when use PTPopupWebViewContoller)
             delegate.close()
@@ -481,7 +481,7 @@ open class PTPopupWebView : UIView {
     }
     
     
-    internal func buttonTapped (_ sender: AnyObject) {
+    @objc internal func buttonTapped (_ sender: AnyObject) {
         if let button = sender as? UIButton, let index = buttons.index(of: button) {
             if index < buttonSettings.count {
                 let buttonSetting = buttonSettings[index]
